@@ -6,8 +6,6 @@ public class DepartmentDTO {
 	private Integer manager_id;
 	private Integer location_id;
 	
-	
-	
 	public Integer getDepartment_id() {
 		return department_id;
 	}
