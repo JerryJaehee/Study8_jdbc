@@ -36,6 +36,7 @@ public class DepartMentController {
 				departmentDTO.setDepartment_id(sc.nextInt());
 				//null이 아니면 ok null이면 검색 실패 
 				departmentDTO = departmentDAO.getOne(departmentDTO);
+				departmentView.view(departmentDTO);
 				break;
 			default :
 				flag = false;
