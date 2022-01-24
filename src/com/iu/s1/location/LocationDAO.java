@@ -15,6 +15,7 @@ public class LocationDAO {
 	public LocationDAO() {
 		dbConnector = new DBConnector();
 	}
+	
 	public List<LocationDTO> getList() throws Exception {
 		ArrayList<LocationDTO> ar = new ArrayList();
 		
