@@ -3,8 +3,6 @@ package com.iu.s1.department;
 import java.util.List;
 import java.util.Scanner;
 
-import oracle.jdbc.driver.DatabaseError;
-
 public class DepartMentController {
 
 	private DepartmentDAO departmentDAO;

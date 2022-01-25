@@ -1,10 +1,15 @@
 package com.iu.s1.department;
 
+import java.util.List;
+
+import com.iu.s1.employee.EmployeeDTO;
+
 public class DepartmentDTO {
 	private Integer department_id;
 	private String department_name;
 	private Integer manager_id;
 	private Integer location_id;
+	//employeeDTO 멤버변수가 있어야 함
 	
 	public Integer getDepartment_id() {
 		return department_id;

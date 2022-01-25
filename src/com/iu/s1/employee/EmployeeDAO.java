@@ -1,5 +1,83 @@
 package com.iu.s1.employee;
 
-public class EmployeeDAO {
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.iu.s1.util.DBConnector;
+
+public class EmployeeDAO {
+	private DBConnector dbConnector;
+	
+	public EmployeeDAO() {
+		dbConnector = new DBConnector();
+	}
+	
+	public EmployeeDTO getOne(EmployeeDTO empDto) throws Exception{
+		EmployeeDTO employeeDTO = null;
+		
+		Connection con = dbConnector.getConnect();
+		String sql = "SELECT * FROM EMPLOYEES WHERE EMPLOYEE_ID = ? ";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setInt(1, empDto.getEmployee_id());
+		ResultSet rs = st.executeQuery();
+		if(rs.next()) {
+			employeeDTO = new EmployeeDTO();
+			employeeDTO.setEmployee_id(rs.getInt("employee_id"));
+			employeeDTO.setFirst_name(rs.getString("first_name"));
+			employeeDTO.setLast_name(rs.getString("last_name"));
+			employeeDTO.setEmail(rs.getString("email"));
+			employeeDTO.setPhone_number(rs.getString("phone_number"));
+			employeeDTO.setHire_date(rs.getString("hire_date"));
+			employeeDTO.setJob_id(rs.getString("job_id"));
+			employeeDTO.setSalary(rs.getInt("salary"));
+			employeeDTO.setCommission_pct(rs.getDouble("commission_pct"));
+			employeeDTO.setManager_id(rs.getInt("manager_id"));
+			employeeDTO.setDepartment_id(rs.getInt("department_id"));
+		}
+		rs.close();
+		st.close();
+		con.close();
+		
+		return employeeDTO;
+	}
+	
+	public List<EmployeeDTO> getList() throws Exception{
+		ArrayList<EmployeeDTO> ar = new ArrayList<>();
+		
+		Connection con = dbConnector.getConnect();
+		
+		String sql = "SELECT * FROM EMPLOYEES";
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		ResultSet rs = st.executeQuery();
+		
+		while(rs.next()) {
+			EmployeeDTO employeeDTO = new EmployeeDTO();
+			employeeDTO.setEmployee_id(rs.getInt("employee_id"));
+			employeeDTO.setFirst_name(rs.getString("first_name"));
+			employeeDTO.setLast_name(rs.getString("last_name"));
+			employeeDTO.setEmail(rs.getString("email"));
+			employeeDTO.setPhone_number(rs.getString("phone_number"));
+			employeeDTO.setHire_date(rs.getString("hire_date"));
+			employeeDTO.setJob_id(rs.getString("job_id"));
+			employeeDTO.setSalary(rs.getInt("salary"));
+			employeeDTO.setCommission_pct(rs.getDouble("commission_pct"));
+			employeeDTO.setManager_id(rs.getInt("manager_id"));
+			employeeDTO.setDepartment_id(rs.getInt("department_id"));
+			
+			ar.add(employeeDTO);
+		}
+		
+		rs.close();
+		st.close();
+		con.close();
+		
+		return ar;
+		
+	}
+	
 }
